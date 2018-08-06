@@ -1,0 +1,19 @@
+
+app:
+  container_name: webserver-node
+  restart: always
+  build: ./node
+  ports:
+    - "4000:4000"
+  volumes:
+    - /var/local/project/app:/usr/src/app
+  links:
+    - mongo
+
+mongo:
+  container_name: mongodb
+  image: mongo:latest
+  ports:
+    - "27000:27000"
+  volumes:
+    - '.:/usr/src/app/data'
